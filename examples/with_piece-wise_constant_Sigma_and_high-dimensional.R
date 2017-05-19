@@ -1,3 +1,5 @@
+# FDRcorrectedSCCA  Copyright (C) 2017  Alexej Gossmann
+
 library(dplyr)
 library(doParallel)
 # adjust the number of cores to the particular system

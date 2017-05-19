@@ -1,3 +1,5 @@
+# FDRcorrectedSCCA  Copyright (C) 2017  Alexej Gossmann
+
 #' @importFrom foreach %dopar%
 NULL
 
