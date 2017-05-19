@@ -3,7 +3,7 @@
 library(dplyr)
 library(doParallel)
 # adjust the number of cores to the particular system
-cores <- 4
+cores <- as.integer(Sys.getenv("SLURM_NTASKS_PER_NODE"))
 doParallel::registerDoParallel(cores)
 
 # load auxilliary functions from the folder ../R/

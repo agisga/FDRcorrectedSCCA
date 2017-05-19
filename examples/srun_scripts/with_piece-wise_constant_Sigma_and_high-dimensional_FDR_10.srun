@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH --qos=normal            # Quality of Service
+#SBATCH --job-name=FDR10        # Job Name
+#SBATCH --time=24:00:00         # WallTime
+#SBATCH --nodes=1               # Number of Nodes
+#SBATCH --ntasks-per-node=20    # Number of Tasks per Node
+
+module load R/3.3.1-intel
+
+Rscript with_piece-wise_constant_Sigma_and_high-dimensional.R 0.1
