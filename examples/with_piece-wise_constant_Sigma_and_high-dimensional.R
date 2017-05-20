@@ -141,4 +141,4 @@ for (n_row in n_row_vec) {
 }
 
 # save the simulation results
-save(list = ls(), file = paste0("./examples/RData/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_", fdr*100, ".RData"))
+save(list = ls(), file = paste0("./examples/results/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_", fdr*100, ".RData"))
