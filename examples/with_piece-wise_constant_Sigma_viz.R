@@ -4,20 +4,19 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-load(file = "./RData/with_piece-wise_constant_Sigma.RData")
+load(file = "./results/with_piece-wise_constant_Sigma.RData")
 low_dimensional <- simulation_results_df
 low_dimensional <- mutate(low_dimensional, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
-system("ls ./RData")
-load(file = "./RData/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_5.RData")
+load(file = "./results/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_5.RData")
 high_dimensional_1 <- simulation_results_df
 high_dimensional_1 <- mutate(high_dimensional_1, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
-load(file = "./RData/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_10.RData")
+load(file = "./results/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_10.RData")
 high_dimensional_2 <- simulation_results_df
 high_dimensional_2 <- mutate(high_dimensional_2, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
-load(file = "./RData/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_20.RData")
+load(file = "./results/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_20.RData")
 high_dimensional_3 <- simulation_results_df
 high_dimensional_3 <- mutate(high_dimensional_3, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
@@ -60,7 +59,7 @@ simulation_results_df %>%
     theme(legend.title = element_blank(),
           legend.position = "bottom")
 
-ggsave("./viz/with_piece-wise_constant_Sigma_FDR_graph.pdf")
+ggsave("./results/with_piece-wise_constant_Sigma_FDR_graph.pdf")
 
 # bar graph: mean number of true positives
 simulation_results_df %>%
@@ -86,7 +85,7 @@ simulation_results_df %>%
     xlab(expression(s[Y])) + ylab("TP(v) +/- 2SE") +
     theme_bw()
 
-ggsave("./viz/with_piece-wise_constant_Sigma_TP_graph.pdf")
+ggsave("./results/with_piece-wise_constant_Sigma_TP_graph.pdf")
 
 # histograms of proportions of true positives and false positives (combined for all n_signif conditions across the board)
 simulation_results_df %>%
@@ -100,4 +99,4 @@ simulation_results_df %>%
     theme_bw() +
     theme(axis.title = element_blank())
 
-ggsave("./viz/with_piece-wise_constant_Sigma_FDP_and_TPP_hist.pdf")
+ggsave("./results/with_piece-wise_constant_Sigma_FDP_and_TPP_hist.pdf")

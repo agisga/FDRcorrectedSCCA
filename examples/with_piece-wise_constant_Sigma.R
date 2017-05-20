@@ -121,4 +121,4 @@ for(fdr in fdr_vec) {
 }
 
 # save the simulation results
-save(list = ls(), file = "./examples/RData/with_piece-wise_constant_Sigma.RData")
+save(list = ls(), file = "./examples/results/with_piece-wise_constant_Sigma.RData")
