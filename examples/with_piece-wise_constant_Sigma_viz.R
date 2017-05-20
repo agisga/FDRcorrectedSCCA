@@ -8,15 +8,16 @@ load(file = "./RData/with_piece-wise_constant_Sigma.RData")
 low_dimensional <- simulation_results_df
 low_dimensional <- mutate(low_dimensional, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
-load(file = "../RData/constant_high_dimensional_fdr_0.05.RData")
+system("ls ./RData")
+load(file = "./RData/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_5.RData")
 high_dimensional_1 <- simulation_results_df
 high_dimensional_1 <- mutate(high_dimensional_1, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
-load(file = "../RData/constant_high_dimensional_fdr_0.1.RData")
+load(file = "./RData/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_10.RData")
 high_dimensional_2 <- simulation_results_df
 high_dimensional_2 <- mutate(high_dimensional_2, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
-load(file = "../RData/constant_high_dimensional_fdr_0.2.RData")
+load(file = "./RData/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_20.RData")
 high_dimensional_3 <- simulation_results_df
 high_dimensional_3 <- mutate(high_dimensional_3, n_col_X = n_col_X, n_col_Y = n_col_Y)
 
@@ -50,10 +51,8 @@ simulation_results_df %>%
                        labels = list(bquote(q==0.05), bquote(q==0.1), bquote(q==0.2))) +
     scale_linetype_manual(values = c(3, 1, 2),
                           labels = list(bquote(q==0.05), bquote(q==0.1), bquote(q==0.2))) +
-#    geom_ribbon(aes(ymin = FDR - 2*SE, ymax = FDR + 2*SE), alpha = 0.3) +
     geom_errorbar(aes(ymin = FDR - 2*SE, ymax = FDR + 2*SE, color = target_FDR),
                   width = 2, size = 0.4, show.legend = FALSE) +
-#    geom_segment(aes(x = 0, y = fdr, xend = max(n_signif_Y), yend = fdr), lty = 2) +
     facet_grid(n_col ~ n_signif_X, scales = "free_y",
                labeller = labeller(n_signif_X = label_parsed, n_col = label_parsed)) +
     xlab(expression(s[Y])) + ylab("Estimated FDR(v) +/- 2SE") +
@@ -61,7 +60,7 @@ simulation_results_df %>%
     theme(legend.title = element_blank(),
           legend.position = "bottom")
 
-ggsave("./viz/constant_combined.pdf")
+ggsave("./viz/with_piece-wise_constant_Sigma_FDR_graph.pdf")
 
 # bar graph: mean number of true positives
 simulation_results_df %>%
@@ -87,42 +86,9 @@ simulation_results_df %>%
     xlab(expression(s[Y])) + ylab("TP(v) +/- 2SE") +
     theme_bw()
 
-ggsave("./viz/constant_TP_combined.pdf")
+ggsave("./viz/with_piece-wise_constant_Sigma_TP_graph.pdf")
 
-# violin plot: number of true positives
-simulation_results_df %>%
-  filter(n_row == 500 & target_FDR == 0.1) %>%
-  mutate(n_col = paste0("n = ", n_row, ", p = ", n_col_X, ", q = ", n_col_Y)) %>%
-  mutate(n_col_vs_n_signif_X_vs_n_signif_Y = paste(n_col, n_signif_X,
-                                                   n_signif_Y, sep = "_")) %>%
-  mutate(n_col_vs_n_signif_X_vs_n_signif_Y = factor(n_col_vs_n_signif_X_vs_n_signif_Y,
-               levels = rev(sort(unique(n_col_vs_n_signif_X_vs_n_signif_Y))),
-               ordered = TRUE)) %>%
-  mutate(n_signif_X = factor(paste0("s[X]==", n_signif_X))) %>%
-  mutate(n_signif_Y = factor(paste0("s[Y]==", n_signif_Y))) %>%
-  mutate(n_col = factor(n_col, rev(sort(unique(n_col))), ordered = TRUE)) %>%
-  ggplot(aes(x = n_signif_Y, y = TP)) +
-    geom_violin() +
-    facet_grid(n_col ~ n_signif_X,
-               labeller = labeller(n_signif_X = label_parsed)) +
-    theme_bw()
-
-# proportion of TP identified
-simulation_results_df %>%
-  filter(n_row == 500 & target_FDR == 0.1) %>%
-  mutate(n_col = paste0("n = ", n_row, ", p = ", n_col_X, ", q = ", n_col_Y)) %>%
-  mutate(sensitivity = TP / n_signif_Y) %>% # aka recall or TPR
-  mutate(n_col = factor(n_col, rev(sort(unique(n_col))), ordered = TRUE)) %>%
-  mutate(n_signif_Y = factor(paste0("s[Y]==", n_signif_Y))) %>%
-  ggplot(aes(sensitivity)) +
-    geom_histogram(bins = 10) +
-    facet_grid(n_col ~ n_signif_Y,
-               labeller = labeller(n_signif_Y = label_parsed)) +
-    theme_bw()
-
-ggsave("./viz/constant_sensitivity_by_n_signif_Y.pdf")
-
-# proportion of TP identified (combined for all n_signif conditions across the board)
+# histograms of proportions of true positives and false positives (combined for all n_signif conditions across the board)
 simulation_results_df %>%
   filter(n_row == 500 & target_FDR == 0.1) %>%
   mutate(TPP = TP / n_signif_Y) %>% # aka recall or sensitivity
@@ -134,4 +100,4 @@ simulation_results_df %>%
     theme_bw() +
     theme(axis.title = element_blank())
 
-ggsave("./viz/constant_sensitivity_hist.pdf")
+ggsave("./viz/with_piece-wise_constant_Sigma_FDP_and_TPP_hist.pdf")
