@@ -2,6 +2,8 @@
 
 The R scripts `with_piece-wise_constant_Sigma.R` and `with_piece-wise_constant_Sigma_and_high-dimensional.R` perform simulations applying the FDR-corrected sparse CCA procedure, described in [Gossmann et. al. *FDR-Corrected Sparse Canonical Correlation Analysis with Applications to Imaging Genomics* (2017)](https://arxiv.org/abs/1705.04312), to Gaussian data with a piece-wise constant correlation structure (under many different parameter choices).
 
+The code in `with_piece-wise_constant_Sigma_viz.R` generates some of the figures shown in the paper from the results of the other two scripts.
+
 Example simulations can be found in the `examples/` directory. Before you can run the examples you need to perform the following steps in R:
 
 1. Install the `devtools` R package (if you don't have it installed already):
