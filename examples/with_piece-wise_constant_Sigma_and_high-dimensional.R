@@ -1,14 +1,11 @@
 # FDRcorrectedSCCA  Copyright (C) 2017  Alexej Gossmann
 
+library(FDRcorrectedSCCA)
 library(dplyr)
 library(doParallel)
 # adjust the number of cores to the particular system
 cores <- 4
 doParallel::registerDoParallel(cores)
-
-# load auxilliary functions from the folder ../R/
-setwd("..")
-devtools::load_all()
 
 # set some parameters
 set.seed(20170318)
@@ -141,4 +138,4 @@ for (n_row in n_row_vec) {
 }
 
 # save the simulation results
-save(list = ls(), file = paste0("./examples/results/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_", fdr*100, ".RData"))
+save(list = ls(), file = paste0("./results/with_piece-wise_constant_Sigma_and_high-dimensional_FDR_", fdr*100, ".RData"))

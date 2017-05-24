@@ -61,6 +61,15 @@ L1_CCA_loocv <- function(X, Y, lambda_X, lambda_Y, num_cores) {
               "CV_scores"  = scores))
 }
 
+#' L1-penalized SCCA with sparsity bounds
+#'
+#' L1-penalized SCCA with prespecified sparsity levels for the coefficient vectors
+#'
+#' Sparse CCA with L1 penalty is performed repeatedly, while the tuning
+#' parameters are optimized to yield a result that is close to a
+#' prespecified sparsity
+#'
+#' @export
 L1_CCA_with_sparsity_bound <- function(X, Y, bound_X, bound_Y,
                                        tolerance, verbose = FALSE,
                                        max_iter = 100) {

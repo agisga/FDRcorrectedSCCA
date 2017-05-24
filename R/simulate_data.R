@@ -1,5 +1,8 @@
 # FDRcorrectedSCCA  Copyright (C) 2017  Alexej Gossmann
 
+#' Simulate multivariate normal data
+#'
+#' @export
 simulate_MVN_data <- function(n_row, n_col_X, n_col_Y, Sigma_chol) {
 
   n_col <- n_col_X + n_col_Y

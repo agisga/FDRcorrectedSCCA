@@ -1,15 +1,12 @@
 # FDRcorrectedSCCA  Copyright (C) 2017  Alexej Gossmann
 
+library(FDRcorrectedSCCA)
 library(dplyr)
 library(doParallel)
 
 # adjust the number of cores to the particular system
 cores <- 2
 doParallel::registerDoParallel(cores)
-
-# load auxilliary functions from the folder ../R/
-setwd("..")
-devtools::load_all()
 
 # set some parameters
 set.seed(20170318)
@@ -121,4 +118,4 @@ for(fdr in fdr_vec) {
 }
 
 # save the simulation results
-save(list = ls(), file = "./examples/results/with_piece-wise_constant_Sigma.RData")
+save(list = ls(), file = "./results/with_piece-wise_constant_Sigma.RData")
