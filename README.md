@@ -11,7 +11,7 @@ Example simulations can be found in the `examples/` directory. Before you can ru
     install.packages("devtools")
     ```
 
-2. Open the file `FDRcorrectedSCCA.Rproj` in [RStudio](https://www.rstudio.com/).
+2. Open the file `FDRcorrectedSCCA.Rproj` in [RStudio](https://www.rstudio.com/) (you can create the Rproj file from RStudio via `File > New Project > Existing Directory`).
 
 3. Then run
     ```R
