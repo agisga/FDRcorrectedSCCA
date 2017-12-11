@@ -1,5 +1,3 @@
-# FDRcorrectedSCCA  Copyright (C) 2017  Alexej Gossmann
-
 #' @importFrom foreach %dopar%
 NULL
 
@@ -135,4 +133,60 @@ L1_CCA_with_sparsity_bound <- function(X, Y, bound_X, bound_Y,
   return(list("best_model" = model,
               "lambda_X"   = lambda_X,
               "lambda_Y"   = lambda_Y))
+}
+
+L1_CCA_CV <- function(X, Y, lambda_X, lambda_Y, n_folds = 5) {
+
+  n <- nrow(X)
+  if (nrow(Y) != n) stop("X Y dimensions mismatch!")
+
+  # considered are penalty pairs (lambda_X[1], lambda_Y[1]), (lambda_X[2], lambda_Y[2]), etc. (one-dimensional search)
+  if (length(lambda_X) != length(lambda_Y)) stop("lambda_X and lambda_Y need to be of the same length!")
+
+  # CCA_out is a list of lists where:
+  # - CCA_out[[i]] corresponds to lambda_X[i], lambda_Y[i]
+  # - CCA_out[[i]][[j]] contains the SCCA run on the j'th CV fold combination
+
+  fold_ind <- caret::createFolds(rnorm(n), k = n_folds, list = TRUE,
+                                 returnTrain = FALSE)
+
+  CCA_out <- vector(mode = "list", length = length(lambda_X))
+
+  for (i in 1:length(lambda_X)) {
+    for (j in 1:length(fold_ind)) {
+      X_sub <- X[-fold_ind[[j]], ]
+      Y_sub <- Y[-fold_ind[[j]], ]
+      CCA_out[[i]][[j]] <- PMA::CCA(x = X_sub, z = Y_sub,
+                                    typex = "standard",
+                                    typez = "standard",
+                                    K = 1, trace = FALSE,
+                                    penaltyx = lambda_X[i],
+                                    penaltyz = lambda_Y[i])
+    }
+  }
+
+  # compute CV scores on test folds
+
+  get_score_ij <- function(i, j) {
+    u_ij <- CCA_out[[i]][[j]]$u
+    v_ij <- CCA_out[[i]][[j]]$v
+    return(abs(as.double(t(X[fold_ind[[j]], ] %*% u_ij) %*% (Y[fold_ind[[j]], ] %*% v_ij))))
+  }
+
+  scores <- sapply(1:length(lambda_X),
+    function(i) {
+      mean(sapply(1:n_folds, function(j) get_score_ij(i, j) ))
+    })
+
+  # identify lambdas corresponding to the largest CV score
+  ind <- min(which(scores == max(abs(scores))))
+  best_lambda_X <- lambda_X[ind]
+  best_lambda_Y <- lambda_Y[ind]
+
+  # return the best model
+  best_CCA <- PMA::CCA(x = X, z = Y, trace = FALSE, K = 1, niter = 1000,
+                       typex = "standard", typez = "standard",
+                       penaltyx = best_lambda_X, penaltyz = best_lambda_Y)
+
+  return(best_CCA)
 }

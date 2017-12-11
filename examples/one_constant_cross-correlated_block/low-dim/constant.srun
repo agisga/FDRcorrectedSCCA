@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=agossman@tulane.edu
+#SBATCH --error=errors.txt
+#SBATCH --qos=normal
+#SBATCH --job-name=array
+#SBATCH --array=1-50
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=10
+#SBATCH --time=01:00:00
+#SBATCH --mem=64000
+
+module load R/3.4.1-intel
+
+Rscript constant.R

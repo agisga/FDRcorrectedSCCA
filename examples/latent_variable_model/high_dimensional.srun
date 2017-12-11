@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --qos=normal
+#SBATCH --job-name=HC_latent
+#SBATCH --array=1-100
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=5
+#SBATCH --time=01:00:00
+
+module load R/3.4.1-intel
+
+Rscript high_dimensional.R 0.10

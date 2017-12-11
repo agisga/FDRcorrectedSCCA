@@ -1,6 +1,6 @@
-Package: FDRcorrectedSCCA
+Package: FDRcorrectedCCA
 Type: Package
-Title: FDR-Corrected Sparse Canonical Correlation Analysis
+Title: FDR-Corrected Canonical Correlation Analysis
 Version: 0.0.1.9999
 Author@R: person("Alexej", "Gossmann", email = "alexej.go@gmail.com", role = c("aut", "cre"))
 Description: More about what it does (maybe more than one line)
@@ -13,4 +13,4 @@ Imports:
     parallel,
     doParallel,
     PMA
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1.9000

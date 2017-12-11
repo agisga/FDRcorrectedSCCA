@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=agossman@tulane.edu
+#SBATCH --qos=normal            # Quality of Service
+#SBATCH --job-name=cHD_5CV      # Job Name
+#SBATCH --time=24:00:00         # WallTime
+#SBATCH --nodes=1               # Number of Nodes
+#SBATCH --ntasks-per-node=1     # Number of Tasks per Node
+#SBATCH --cpus-per-task=20      # Number of threads per task (OMP threads)
+#SBATCH --mem=64000
+
+module load R/3.4.1-intel
+
+Rscript constant_high_dimensional_5foldCV.R
