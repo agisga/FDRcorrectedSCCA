@@ -1,10 +1,12 @@
 # FDR-corrected SCCA R scripts
 
-The R scripts `with_piece-wise_constant_Sigma.R` and `with_piece-wise_constant_Sigma_and_high-dimensional.R` perform simulations applying the FDR-corrected sparse CCA procedure, described in [Gossmann et. al. *FDR-Corrected Sparse Canonical Correlation Analysis with Applications to Imaging Genomics* (2017)](https://arxiv.org/abs/1705.04312), to Gaussian data with a piece-wise constant correlation structure (under many different parameter choices).
+The R scripts in the `examples` directory perform the simulation studies described in [Gossmann et. al. *FDR-Corrected Sparse Canonical Correlation Analysis with Applications to Imaging Genomics* (2017)](https://arxiv.org/abs/1705.04312). Code to generate visualizations from the simulation results, as presented in the paper, is provided in this repository as well.
 
-The code in `with_piece-wise_constant_Sigma_viz.R` generates some of the figures shown in the paper from the results of the other two scripts.
+The R scripts have been written with the intention of running them on the [high performance computing cluster Cypress at Tulane University](https://crsc.tulane.edu/), which uses the [Slurm resource management system](https://slurm.schedmd.com/documentation.html).
 
-Example simulations can be found in the `examples/` directory. Before you can run the examples you need to perform the following steps in R:
+Many functions (see the `R` directory), which are used to implement the simulations in the `examples` directory, are provided in form of an R package. The R package `FDRcorrectedSCCA` can be installed using `devtools` in R (see below). However, this should not be necessary in order to run the scripts from the `examples` directory, because within those scripts all functions from the `FDRcorrectedSCCA` package are loaded with `devtools::load_all()`.
+
+Nevertheless, if you wish to install the R package `FDRcorrectedSCCA`, then perform the following steps in R:
 
 1. Install the `devtools` R package (if you don't have it installed already):
     ```R
@@ -19,5 +21,3 @@ Example simulations can be found in the `examples/` directory. Before you can ru
     ```
 
 4. Still in RStudio press CTRL-Shift-B. (If any of steps 1-4 fail, you are probably missing some other R packages, see the Error or Warning messages. Install the missing packages and try again from step 2.)
-
-5. Run the R scripts from the `examples/` directory (either directly from your R session, or from the command line using `Rscript with_piece-wise_constant_Sigma.R` for example).

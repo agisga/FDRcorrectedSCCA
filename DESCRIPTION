@@ -1,11 +1,13 @@
-Package: FDRcorrectedCCA
+Package: FDRcorrectedSCCA
 Type: Package
-Title: FDR-Corrected Canonical Correlation Analysis
+Title: FDR-Corrected Sparse Canonical Correlation Analysis
 Version: 0.0.1.9999
 Author@R: person("Alexej", "Gossmann", email = "alexej.go@gmail.com", role =
     c("aut", "cre"))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: This R package contains functions used to reproduce the simulation
+    studies described in Gossmann et. al. (2017) "FDR-Corrected Sparse
+    Canonical Correlation Analysis with Applications to Imaging Genomics".
+    Scripts to reproduce the simulations are in the `examples` folder.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -14,4 +16,4 @@ Imports:
     parallel,
     doParallel,
     PMA
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 6.0.1
