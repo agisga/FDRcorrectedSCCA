@@ -15,6 +15,9 @@ simulate_MVN_data <- function(n_row, n_col_X, n_col_Y, Sigma_chol) {
   return(list("X" = X, "Y" = Y))
 }
 
+#' Simulate data for CCA based on a latent variable model
+#'
+#' @export
 simulate_latent_variable_data <- function(n_row, n_col_X, n_col_Y, n_signif_X,
                                           n_signif_Y, noise_var = 1,
                                           shared_var_wthn = 0,

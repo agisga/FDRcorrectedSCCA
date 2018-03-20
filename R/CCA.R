@@ -1,6 +1,11 @@
 #' @importFrom foreach %dopar%
 NULL
 
+#' L1-penalized SCCA with LOOCV
+#'
+#' L1-penalized SCCA with hyperparameter choice via leave-one-out cross-validation
+#'
+#' @export
 L1_CCA_loocv <- function(X, Y, lambda_X, lambda_Y, num_cores) {
 
   doParallel::registerDoParallel(cores = num_cores)
@@ -144,6 +149,15 @@ L1_CCA_with_sparsity_bound <- function(X, Y, bound_X, bound_Y,
               "lambda_Y"   = lambda_Y))
 }
 
+#' L1-penalized SCCA with CV
+#'
+#' L1-penalized SCCA with hyperparameter choice via k-fold cross-validation
+#'
+#' The considered search space is effectively one-dimensional by considering
+#' penalty pairs (lambda_X[1], lambda_Y[1]), (lambda_X[2], lambda_Y[2]), etc.
+#' The number of cross-validation folds can be specified.
+#'
+#' @export
 L1_CCA_CV <- function(X, Y, lambda_X, lambda_Y, n_folds = 5) {
 
   n <- nrow(X)

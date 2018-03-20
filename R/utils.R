@@ -1,3 +1,6 @@
+#' Benjamini-Hochberg procedure
+#'
+#' @export
 BH_select <- function(p_values, fdr) {
   p <- length(p_values)
   below_threshold <- sort(p_values) <= fdr * (1:p) / p
@@ -13,6 +16,15 @@ BH_select <- function(p_values, fdr) {
   return(selected_ind)
 }
 
+#' Covariance matrix estimation
+#'
+#' Covariance matrix from the asymptotic distribution derived in Gossmann et. al. (2018)
+#'
+#' Get the covariance matrix defined in Theorem 1 of Gossmann et. al. (2018)
+#' "FDR-Corrected Sparse Canonical Correlation Analysis with Applications to Imaging Genomics"
+#' (https://arxiv.org/pdf/1705.04312).
+#'
+#' @export
 get_Omega <- function(u0, S_X1, S_Y1, S_Y1X1) {
   Omega1 <- matrix(NA, ncol(S_Y1), ncol(S_Y1))
 
