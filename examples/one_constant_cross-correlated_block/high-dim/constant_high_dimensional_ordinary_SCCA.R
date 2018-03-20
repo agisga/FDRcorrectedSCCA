@@ -8,7 +8,7 @@ out_path <- paste0(out_path, "constant_high_dimensional_ordinary_SCCA/")
 cores <- as.integer(Sys.getenv("SLURM_CPUS_PER_TASK"))
 doParallel::registerDoParallel(cores)
 
-setwd("../../../..")
+setwd("../../..")
 devtools::load_all()
 
 set.seed(20170225)

@@ -8,7 +8,7 @@ out_path <- paste0(out_path, "constant_low_dimensional_ordinary_SCCA/")
 cores <- as.integer(Sys.getenv("SLURM_CPUS_PER_TASK"))
 doParallel::registerDoParallel(cores)
 
-setwd("../../../..")
+setwd("../../..")
 devtools::load_all()
 
 slurm_task_id  <- Sys.getenv("SLURM_ARRAY_TASK_ID") # run this as an array job 500/10=50 times

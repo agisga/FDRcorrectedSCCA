@@ -8,7 +8,7 @@ out_path <- paste0(out_path,
                    "latent_vars_blocked_design/",
                    "high_dim/")
 
-setwd("../../..")
+setwd("../..")
 devtools::load_all()
 
 cmd_args <- commandArgs(TRUE)

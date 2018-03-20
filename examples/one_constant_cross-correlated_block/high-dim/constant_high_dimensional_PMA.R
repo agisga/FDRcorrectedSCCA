@@ -9,7 +9,7 @@ out_path <- paste0(out_path, "constant_high_dimensional_PMA/")
 cores <- as.integer(Sys.getenv("SLURM_NTASKS_PER_NODE"))
 doParallel::registerDoParallel(cores)
 
-setwd("../../../..")
+setwd("../../..")
 devtools::load_all()
 
 set.seed(20170225)
