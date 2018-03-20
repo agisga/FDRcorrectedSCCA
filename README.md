@@ -6,16 +6,26 @@ The R scripts have been written with the intention of running them on the [high 
 
 ## R package
 
-Many functions (see the `R` directory), which are used to implement the simulations in the `examples` directory, are provided in form of an R package. The R package `FDRcorrectedSCCA` can be installed using `devtools` in R (see below). However, this should not be necessary in order to run the scripts from the `examples` directory, because within those scripts all functions from the `FDRcorrectedSCCA` package are loaded with `devtools::load_all()`. However, if you have trouble running the example scripts (*ahem* Windows *ahem*...), try installing the required functions as an R package following the instructions below.
+Many functions (see the `R` directory), which are used to implement the simulations in the `examples` directory, are provided in form of an R package. The R package `FDRcorrectedSCCA` can be installed using `devtools` in R (see below). However, this should not be necessary in order to run the scripts from the `examples` directory, because within those scripts all functions from the `FDRcorrectedSCCA` package are loaded with `devtools::load_all()`.
 
-If you wish to install the R package `FDRcorrectedSCCA`, then perform the following steps in R:
+However, if you have trouble running the example scripts (*ahem* Windows *ahem*...), try installing the required functions as an R package following the instructions below. In that case the line `devtools::load_all()` has to be replaced with `library(FDRcorrectedSCCA)` in the example codes.
+
+The R package `FDRcorrectedSCCA` can be installed form a running R session with:
+
+```R
+# install.packages("devtools") # if devtools is not installed
+library(devtools)
+install_github("agisga/FDRcorrectedSCCA")
+```
+
+### Development workflow - Manual installation of the R package
 
 1. Install the `devtools` R package (if you don't have it installed already):
     ```R
     install.packages("devtools")
     ```
 
-2. Open the file `FDRcorrectedSCCA.Rproj` in [RStudio](https://www.rstudio.com/) (you can create the Rproj file from RStudio via `File > New Project > Existing Directory`).
+2. Open the file `FDRcorrectedSCCA.Rproj` in [RStudio](https://www.rstudio.com/) (if no Rproj file is available, you can create the Rproj file from RStudio via `File > New Project > Existing Directory`).
 
 3. Then run
     ```R
